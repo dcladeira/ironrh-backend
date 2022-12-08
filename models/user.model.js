@@ -45,6 +45,9 @@ const userSchema = new Schema(
         admissionDate: {
             type: Date
         },
+        resignationDate: {
+            type: Date
+        },
         active: {
             type: Boolean,
             default: true

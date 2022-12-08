@@ -2,6 +2,7 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import UserModel from '../models/user.model.js'
 import generateToken from '../config/jwt.config.js'
+import TodoModel from '../models/todo.model.js'
 
 const router = express.Router()
 const rounds = 10
@@ -86,18 +87,30 @@ router.post("/login", async (request, response) => {
     }
 })
 
-router.put('/edit', async (request, response) => {
+router.put('/edit/:id', async (request, response) => {
     try {
-        
+        const { id } = request.params
+        const updateEmployeeById = await UserModel.findByIdAndUpdate(
+            id,
+            { ...request.body },
+            { new: true, runValidators: true }
+        )
+
+        return response.status(200).json(updateEmployeeById)
     } catch (error) {
         console.log(error)
         return response.status(500).json({ msg: 'algo deu errado' })
     }
 })
 
-router.delete('', async (request, response) => {
+router.delete('/delete/:id', async (request, response) => {
     try {
-        
+        const { id } = request.params
+    
+        const deleteEmployee = await UserModel.findByIdAndDelete(id)
+        await TodoModel.deleteMany({ responsable: id })
+    
+        return response.status(200).json(deleteEmployee)
     } catch (error) {
         console.log(error)
         return response.status(500).json({ msg: 'algo deu errado' })
