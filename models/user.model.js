@@ -20,7 +20,7 @@ const userSchema = new Schema(
         },
         profileImg: {
             type: String,
-            required: true
+            default: "https://res.cloudinary.com/die2rduds/image/upload/v1670509301/ironrh-gallery/profile-picture_lbhtd4.png"
         },
         isAdmin: {
             type: Boolean,

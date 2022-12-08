@@ -11,11 +11,10 @@ dotenv.config()
 dbConnect()
 
 const app = express()
-// configuração da origin da aplicação react
+
 app.use(cors( { origin: process.env.REACT_URL } ))
 app.use(express.json())
 
-// 8080/user/register
 app.use('/user', userRouter)
 app.use('/todo', todoRouter)
 app.use('/', uploadImgRouter)
