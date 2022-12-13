@@ -1,0 +1,396 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "IRONRH REST API",
+    "description": "RH system with a task managment for companies"
+  },
+  "host": "ironrh-api.cyclic.app",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "CRUD for users and employees"
+    },
+    {
+      "name": "Todos",
+      "description": "CRUD for tasks"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "GetAllUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "GetUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "CreateNewUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "profileImg": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "UserLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/edit/{id}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "EditUserById",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/delete/{id}": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "DeleteUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/todo/": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "GetAllTodos",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/todo/{id}": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "GetTodoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/todo/create/{employeeId}": {
+      "post": {
+        "tags": ["Todos"],
+        "summary": "CreateTodoByUser",
+        "parameters": [
+          {
+            "name": "todo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/todo/edit/{id}": {
+      "put": {
+        "tags": ["Todos"],
+        "summary": "EditTodoById",
+        "parameters": [
+          {
+            "name": "todo",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/todo/delete/{id}": {
+      "delete": {
+        "tags": ["Todos"],
+        "summary": "DeleteTodoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/upload-image": {
+      "post": {
+        "summary": "InsertNewImage",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["name", "email", "password"],
+      "properties" : {
+        "_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "unique": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "profileImg": {
+          "type": "string"
+        },
+        "isAdmin": {
+          "type": "boolean"
+        },
+        "phone": {
+          "type": "String"
+        },
+        "department": {
+          "type": "string"
+        },
+        "salary": {
+          "type": "number"
+        },
+        "status": {
+          "type": "String",
+          "enum": ["Disponível", "Alocado", "De Férias", "De Licença", "Produto"]
+        },
+        "birthDate": {
+          "type": "date"
+        },
+        "admissionDate": {
+          "type": "date"
+        },
+        "resignationDate": {
+          "type": "date"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "address": {
+          "city": { "type": "string" },
+          "state": { "type": "string" }
+        },
+        "todos": {
+          "type": "array",
+          "$ref": "#/definitions/Todo"
+        }
+      }
+    },
+    "Todo": {
+      "required": ["title", "deadline"],
+      "properties" : {
+        "_id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "maxlength": 50
+        },
+        "deadline": {
+          "type": "date",
+          "required": true
+        },
+        "progress": {
+          "type": "string",
+          "enum": ["Não iniciado", "Em Progresso", "Finalizado"]
+        },
+        "responsable": {
+          "type": "integer",
+          "$ref": "#/definitions/User"
+        }
+      }
+    }
+  }
+}
