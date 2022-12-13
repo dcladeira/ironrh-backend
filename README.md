@@ -29,6 +29,7 @@ Após instaladas as dependências, dê o comando seguinte para rodar a aplicaç�
 ```
 node app.js
 ```
+Use o Postman ou o Insomnia para realizar as requisições desejadas.
 
 ## :dart: Status do projeto
 O projeto está em andamento.
